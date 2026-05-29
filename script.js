@@ -5,7 +5,9 @@ const body = document.querySelector("body"),
   minuteHand = document.querySelector(".minute"),
   secondHand = document.querySelector(".second"),
   // 다크모드 - 라이트모드 스위치
-  modeSwitch = document.querySelector(".mode-switch");
+  modeSwitch = document.querySelector(".mode-switch"),
+  angleSwitch = document.querySelector(".angle-switch"),
+  anglePanel = document.querySelector(".angle-panel");
 
 // 시침, 분침, 초침 회전각
 const hourDeg = document.querySelector(".hour-deg"),
@@ -15,16 +17,29 @@ const hourDeg = document.querySelector(".hour-deg"),
 // 현재시각 문자열
 const fullTime = document.querySelector(".full-time");
 
+const updateModeButtonText = () => {
+  const isDarkMode = body.classList.contains("dark");
+  modeSwitch.textContent = isDarkMode
+    ? "Turn to Light Mode"
+    : "Turn to Dark Mode";
+};
+
 // add a click event listener to modeSwitch
 modeSwitch.addEventListener("click", () => {
   // toggle the "dark" class on the body element
   body.classList.toggle("dark");
   // check if the "dark" class is currently present on the body element
   const isDarkMode = body.classList.contains("dark");
-  modeSwitch.textContent = isDarkMode
-    ? "Turn to Light Mode"
-    : "Turn to Dark Mode";
+  updateModeButtonText();
   localStorage.setItem("mode", isDarkMode ? "Dark Mode" : "Light Mode");
+});
+
+angleSwitch.addEventListener("click", () => {
+  const isExpanded = angleSwitch.getAttribute("aria-expanded") === "true";
+
+  angleSwitch.setAttribute("aria-expanded", String(!isExpanded));
+  angleSwitch.textContent = isExpanded ? "회전각 표시하기" : "회전각 숨기기";
+  anglePanel.hidden = isExpanded;
 });
 
 const updateTime = () => {
@@ -72,3 +87,4 @@ setInterval(updateTime, 10);
 
 // call updateTime function on page load
 updateTime();
+updateModeButtonText();

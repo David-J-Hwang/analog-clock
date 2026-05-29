@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Analog Clock Javascript</title>
+  <title>Analog Clock JavaScript</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -31,12 +31,23 @@
         <span class="hand second"></span>
       </div>
     </div>
-    <div class="mode-switch">Dark Mode</div>
-    
-    <div class="hour-deg"></div>
-    <div class="minute-deg"></div>
-    <div class="second-deg"></div>
     <div class="full-time"></div>
+    <div class="controls">
+      <button type="button" class="mode-switch">Turn to Dark Mode</button>
+      <button
+        type="button"
+        class="angle-switch"
+        aria-expanded="false"
+        aria-controls="angle-panel"
+      >
+        회전각 표시하기
+      </button>
+    </div>
+    <div class="angle-panel" id="angle-panel" hidden>
+      <div class="hour-deg"></div>
+      <div class="minute-deg"></div>
+      <div class="second-deg"></div>
+    </div>
   </div>
 
 </body>
